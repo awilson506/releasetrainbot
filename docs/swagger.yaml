@@ -1,0 +1,89 @@
+basePath: /v1
+host: localhost:8080
+info:
+  contact: {}
+  description: This is the API documentation for the Slack rotation bot that manages
+    user rotations.
+  title: Slack Release Train Bot API
+  version: "1.0"
+paths:
+  /slack/command:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Updates the rotation for a channel or creates a new rotation if
+        it doesn't exist
+      parameters:
+      - description: Slack verification token
+        in: formData
+        name: token
+        type: string
+      - description: Slack Team ID
+        in: formData
+        name: team_id
+        type: string
+      - description: Slack Team Domain
+        in: formData
+        name: team_domain
+        type: string
+      - description: Slack Enterprise ID
+        in: formData
+        name: enterprise_id
+        type: string
+      - description: Slack Enterprise Name
+        in: formData
+        name: enterprise_name
+        type: string
+      - description: Channel ID where command was issued
+        in: formData
+        name: channel_id
+        required: true
+        type: string
+      - description: Channel name
+        in: formData
+        name: channel_name
+        type: string
+      - description: User ID of the person who triggered the command
+        in: formData
+        name: user_id
+        type: string
+      - description: Username of the person who triggered the command
+        in: formData
+        name: user_name
+        type: string
+      - description: Slash command (e.g., /release-train)
+        in: formData
+        name: command
+        required: true
+        type: string
+      - description: Text following the command
+        in: formData
+        name: text
+        type: string
+      - description: URL to send delayed response to
+        in: formData
+        name: response_url
+        type: string
+      - description: Trigger ID for interactive components
+        in: formData
+        name: trigger_id
+        type: string
+      - description: Slack App ID
+        in: formData
+        name: api_app_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Rotation updated
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Update or create a channel rotation
+      tags:
+      - slack
+swagger: "2.0"
